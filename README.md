@@ -1,8 +1,8 @@
-# openhost-bbs
+# bottled-bbs
 
-A classic BBS for OpenHost, powered by [ENiGMA½](https://github.com/NuSkooler/enigma-bbs).
+A classic BBS for Cloud in a Bottle, powered by [ENiGMA½](https://github.com/NuSkooler/enigma-bbs).
 
-Deploy this on your OpenHost instance and you get:
+Deploy this on your Cloud in a Bottle instance and you get:
 
 - A telnet-reachable BBS on host port `2323`
 - An SSH-reachable BBS on host port `2222`
@@ -11,10 +11,10 @@ Deploy this on your OpenHost instance and you get:
 
 ## Deploy
 
-From the OpenHost dashboard, add app with the repo URL:
+From the Cloud in a Bottle dashboard, add app with the repo URL:
 
 ```
-https://github.com/imbue-openhost/openhost-bbs
+https://github.com/imbue-openhost/bottled-bbs
 ```
 
 Grant the permissions it asks for (`app_data` — persistent storage for the user database, message base, and file areas). First boot takes a minute or two while it seeds default themes, menus, and config.
@@ -64,7 +64,7 @@ These are only read on first run; once `config.hjson` exists, changing env vars 
 
 ## How the data layout works
 
-ENiGMA expects to write to a handful of directories inside its install tree (`config/`, `db/`, `logs/`, `filebase/`, `mods/`, `art/`). The OpenHost container treats the install tree as immutable and replaces those directories with symlinks into `$OPENHOST_APP_DATA_DIR`. Result: the install is stateless (rebuilds safely) and all your data stays put across deploys, restarts, and app rebuilds.
+ENiGMA expects to write to a handful of directories inside its install tree (`config/`, `db/`, `logs/`, `filebase/`, `mods/`, `art/`). The Cloud in a Bottle container treats the install tree as immutable and replaces those directories with symlinks into `$OPENHOST_APP_DATA_DIR`. Result: the install is stateless (rebuilds safely) and all your data stays put across deploys, restarts, and app rebuilds.
 
 ```
 $OPENHOST_APP_DATA_DIR/
@@ -86,7 +86,7 @@ The Dockerfile pins ENiGMA to a specific commit via `ARG ENIGMA_REF`. To upgrade
 
 1. Bump the commit hash in `Dockerfile`
 2. Commit + push
-3. In the OpenHost dashboard, click "Reload" on the bbs app with the update option checked
+3. In the Cloud in a Bottle dashboard, click "Reload" on the bbs app with the update option checked
 
 The data dir is preserved across upgrades. Only the immutable install tree gets replaced.
 
@@ -99,5 +99,5 @@ The data dir is preserved across upgrades. Only the immutable install tree gets 
 ## Caveats
 
 - `unrar-free` in Debian is lighter than the proprietary `unrar`; users uploading RAR5 archives may run into decompression errors. Swap to `unrar` if you can.
-- The BBS binds raw TCP on the host's public IP. If you want telnet/SSH accessible only from a VPN, firewall the OpenHost host ports accordingly.
+- The BBS binds raw TCP on the host's public IP. If you want telnet/SSH accessible only from a VPN, firewall the Cloud in a Bottle host ports accordingly.
 - There's a first-to-register-wins window where anyone reaching the BBS before you can grab the sysop account. Deploy and claim immediately, or block port 2323/2222 at the firewall until you've registered.
