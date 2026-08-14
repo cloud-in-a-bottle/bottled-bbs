@@ -1,7 +1,7 @@
 [app]
 name = "bbs"
 version = "0.1.0"
-description = "Classic BBS (ENiGMA½) for OpenHost — telnet + SSH access"
+description = "Classic BBS (ENiGMA½) for Cloud in a Bottle — telnet + SSH access"
 
 [runtime]
 type = "serverfull"
